@@ -1,0 +1,23 @@
+.main{
+    padding:10px;
+    
+}
+.gigInternal{
+    background: rgba(225, 225, 225, .5);
+    margin-top: 15px;
+    width: 80%;
+    /* align-self: center; */
+    justify-content: center;
+    align-items: center;
+    /* position: relative; */
+    padding: 5px;
+}
+.imgTag{
+    width: 800px;
+    height:300px;
+    align-self: center;
+}
+.gigInternal:hover{
+    opacity: 0.5;
+    cursor: pointer;
+}

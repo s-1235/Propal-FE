@@ -1,0 +1,46 @@
+.gig{
+        background-repeat: no-repeat;
+        background-size: 300px 300px;
+        min-height: 300px;
+        width: 300px; 
+        opacity: 0.7;
+        text-align: center;
+        justify-content: center;
+        float: left;
+        background-color: blue;
+        cursor: pointer;
+        margin:10px;
+        margin-top: 60px;
+
+}
+.gig2{
+    background-repeat: no-repeat;
+    background-size: 300px 300px;
+    min-height: 300px;
+    width: 300px; 
+    /* opacity: 0.7; */
+    text-align: center;
+    justify-content: center;
+    float: left;
+    background-color: blue;
+    cursor: pointer;
+    margin:10px;
+    margin-top: 60px;
+
+}
+.gig:hover{
+    opacity: 0.5;
+}
+.gig2:hover{
+    opacity:0.5
+}
+.gigtxt{
+    opacity:1.0;
+}
+.card{
+    padding: 10px;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: hidden;
+
+}
