@@ -7,7 +7,7 @@ import axios from "axios";
 const SignUp = () => {
   const [username, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phone, setPhone] = useState("");
   const [bioText, setBioText] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -16,6 +16,12 @@ const SignUp = () => {
 
   const handleNameChange = (e) => {
     setName(e.target.value);
+  };
+  const handleBioTextChange = (e) => {
+    setBioText(e.target.value);
+  };
+  const handlePhoneChange = (e) => {
+    setPhone(e.target.value);
   };
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -34,17 +40,33 @@ const SignUp = () => {
       "registation submitted",
       `name:${username}`,
       `email:${email}`,
+      `phoneNumber:${phone}`,
+      `BioText:${bioText}`,
       `password:${password}`,
-      `confirmPassword:${confirmPassword}`
+      `confirmPassword:${confirmPassword}`,
+      `userType:${userType}`
     );
     if (userType == "user") {
-      dispatch(signupAction({ username, email, password, confirmPassword }));
+      dispatch(
+        signupAction({
+          username,
+          bioText,
+          email,
+          phone,
+          password,
+          confirmPassword,
+          userType,
+        })
+      );
     } else {
       const body = {
         username: username,
+        bioText: bioText,
+        phone,
         email: email,
         password: password,
         confirmPassword: confirmPassword,
+        userType,
       };
       try {
         const res = await axios.post(
@@ -95,7 +117,7 @@ const SignUp = () => {
             fontWeight: 500,
             textTransform: "uppercase",
             textAlign: "center",
-            marginBottom: "2rem",
+            marginBottom: "1rem",
           }}
         >
           Create Account
@@ -122,27 +144,37 @@ const SignUp = () => {
           onChange={handleNameChange}
           value={username}
           sx={{
-            marginBottom: "2rem",
+            marginBottom: "1rem",
           }}
         />
         <TextField
           variant="standard"
           label="Enter Phone Number"
           type="phone"
-          onChange={handleEmailChange}
-          value={email}
+          onChange={handlePhoneChange}
+          value={phone}
           sx={{
-            marginBottom: "2rem",
+            marginBottom: "1rem",
           }}
         />
         <TextField
           variant="standard"
           label="Bio Text"
           type="email"
+          onChange={handleBioTextChange}
+          value={bioText}
+          sx={{
+            marginBottom: "1rem",
+          }}
+        />
+        <TextField
+          variant="standard"
+          label="Email"
+          type="email"
           onChange={handleEmailChange}
           value={email}
           sx={{
-            marginBottom: "2rem",
+            marginBottom: "1rem",
           }}
         />
         <TextField
@@ -152,7 +184,7 @@ const SignUp = () => {
           onChange={handlePasswordChange}
           value={password}
           sx={{
-            marginBottom: "2rem",
+            marginBottom: "1rem",
           }}
         />
         <TextField
@@ -162,7 +194,7 @@ const SignUp = () => {
           onChange={handleConfirmPasswordChange}
           value={confirmPassword}
           sx={{
-            marginBottom: "2rem",
+            marginBottom: "1rem",
           }}
         />
         <Button

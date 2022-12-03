@@ -1,10 +1,10 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
-import * as api from './../../api';
-import { alertActions } from './alertSlice';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+import * as api from "./../../api";
+import { alertActions } from "./alertSlice";
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState: {
     // username: '',
     // email: '',
@@ -15,7 +15,7 @@ const authSlice = createSlice({
   reducers: {
     logOut(state) {
       state.isAuthenticated = false;
-      localStorage.removeItem('user');
+      localStorage.removeItem("user");
     },
     authenticate(state) {
       state.isAuthenticated = true;
@@ -33,20 +33,20 @@ const authSlice = createSlice({
       console.log(action);
       state.username = action.payload?.data.username;
       state.email = action.payload?.data.email;
-      localStorage.removeItem('contractor')
-      localStorage.setItem('currentlyLogged','user')
+      localStorage.removeItem("contractor");
+      localStorage.setItem("currentlyLogged", "user");
       // state.isAuthenticated = true;
     });
   },
 });
 
 export const loginAction = createAsyncThunk(
-  'auth/login',
+  "auth/login",
   async ({ email, password }, thunkApi) => {
     try {
       // const response = await api.login({ email, password });
       const response = await axios.post(
-        'http://localhost:6969/users/login',
+        "http://localhost:6969/users/login",
         {
           email,
           password,
@@ -57,7 +57,7 @@ export const loginAction = createAsyncThunk(
         //   },
         // }
       );
-      console.log(response?.data, 'that');
+      console.log(response?.data, "that");
       // console.log(response, 'this');
       if (!response.data) {
         thunkApi.dispatch(
@@ -72,29 +72,34 @@ export const loginAction = createAsyncThunk(
 
       const userDetails = response?.data;
 
-      localStorage.setItem('user', JSON.stringify(userDetails));
+      localStorage.setItem("user", JSON.stringify(userDetails));
 
       const st = thunkApi.getState((state) => state);
       console.log(st);
       thunkApi.dispatch(authActions.authenticate());
       thunkApi.dispatch(authActions.setUser(response.data.data));
-      thunkApi.dispatch(alertActions.openAlertBox('success'));
+      thunkApi.dispatch(alertActions.openAlertBox("success"));
       return userDetails;
     } catch (error) {
-      console.log('custom error', error);
+      console.log("custom error", error);
       thunkApi.dispatch(alertActions.openAlertBox("Can't Login! Try Again"));
     }
   }
 );
 export const signupAction = createAsyncThunk(
-  'auth/signup',
-  async ({ username, email, password, confirmPassword }, thunkApi) => {
+  "auth/signup",
+  async (
+    { username, email, password, confirmPassword, phone, bioText },
+    thunkApi
+  ) => {
     try {
       const response = await api.signup({
         username,
         email,
         password,
         confirmPassword,
+        phone,
+        bioText,
       });
       console.log(`custom name${username},email:${email}`);
 
@@ -102,17 +107,17 @@ export const signupAction = createAsyncThunk(
       const userDetails = response?.data;
 
       if (!userDetails) {
-        thunkApi.dispatch(alertActions.openAlertBox('Error'));
+        thunkApi.dispatch(alertActions.openAlertBox("Error"));
       } else {
-        thunkApi.dispatch(alertActions.openAlertBox('Account Created'));
+        thunkApi.dispatch(alertActions.openAlertBox("Account Created"));
         thunkApi.getState((state) => state.isAuthenticated === true);
         thunkApi.dispatch(authActions.setUser(userDetails.data));
       }
 
       console.log(userDetails);
-      localStorage.setItem('user', JSON.stringify(userDetails));
+      localStorage.setItem("user", JSON.stringify(userDetails));
     } catch (error) {
-      console.log('custom error', error);
+      console.log("custom error", error);
     }
   }
 );
