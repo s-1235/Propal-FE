@@ -89,7 +89,7 @@ export const loginAction = createAsyncThunk(
 export const signupAction = createAsyncThunk(
   "auth/signup",
   async (
-    { username, email, password, confirmPassword, phone, bioText },
+    { username, email, password, confirmPassword, phone, bioText, userType },
     thunkApi
   ) => {
     try {
@@ -100,6 +100,7 @@ export const signupAction = createAsyncThunk(
         confirmPassword,
         phone,
         bioText,
+        userType,
       });
       console.log(`custom name${username},email:${email}`);
 

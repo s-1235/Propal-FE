@@ -1,11 +1,10 @@
-import { Button, TextField, Box, Typography, MenuItem } from '@mui/material';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { signupAction } from '../../store/slices/authSlice';
-import axios from 'axios';
+import { Button, TextField, Box, Typography, MenuItem } from "@mui/material";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { signupAction } from "../../store/slices/authSlice";
+import axios from "axios";
 
 const SignUp = () => {
-<<<<<<< HEAD
   const [username, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -35,15 +34,12 @@ const SignUp = () => {
   const handleBioText = (e) => {
     setBioText(e.target.value);
   };
-  const handlePhoneNumber = (e) => {
-    setPhoneNumber(e.target.value);
-  };
 
   const handleRegistration = async (e) => {
     e.preventDefault();
 
     console.log(
-      'registation submitted',
+      "registation submitted",
       `name:${username}`,
       `email:${email}`,
       `phoneNumber:${phone}`,
@@ -62,7 +58,6 @@ const SignUp = () => {
           password,
           confirmPassword,
           userType,
-
         })
       );
     } else {
@@ -77,27 +72,27 @@ const SignUp = () => {
       };
       try {
         const res = await axios.post(
-          'http://localhost:6969/contractor/signup/',
+          "http://localhost:6969/contractor/signup/",
           body
         );
         console.log(res);
         if (res.status == 201) {
-          console.log('ok');
+          console.log("ok");
         }
       } catch (err) {
         console.log(err);
       }
     }
   };
-  const [userType, setUserType] = useState('user');
+  const [userType, setUserType] = useState("user");
   const users = [
     {
-      value: 'user',
-      label: 'User',
+      value: "user",
+      label: "User",
     },
     {
-      value: 'contractor',
-      label: 'Contractor',
+      value: "contractor",
+      label: "Contractor",
     },
   ];
   const handleUserType = (e) => {
@@ -107,37 +102,36 @@ const SignUp = () => {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        console.log('submit by form');
+        console.log("submit by form");
       }}
     >
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
+          display: "flex",
+          flexDirection: "column",
         }}
       >
         <Typography
-          variant='h4'
-          component='h2'
+          variant="h4"
+          component="h2"
           sx={{
-            color: '#1d3557',
+            color: "#1d3557",
             fontWeight: 500,
             textTransform: "uppercase",
             textAlign: "center",
             marginBottom: "1rem",
-
           }}
         >
           Create Account
         </Typography>
 
         <TextField
-          id='city-selection'
+          id="city-selection"
           select
-          label='User type'
+          label="User type"
           value={userType}
           onChange={handleUserType}
-          helperText=''
+          helperText=""
         >
           {users.map((option) => (
             <MenuItem key={option.value} value={option.value}>
@@ -146,9 +140,9 @@ const SignUp = () => {
           ))}
         </TextField>
         <TextField
-          variant='standard'
-          label='Name'
-          type='text'
+          variant="standard"
+          label="Name"
+          type="text"
           onChange={handleNameChange}
           value={username}
           sx={{
@@ -167,39 +161,28 @@ const SignUp = () => {
         />
         <TextField
           variant="standard"
-          label="Bio Text"
-          type="email"
-          onChange={handleBioTextChange}
-          value={bioText}
-          sx={{
-            marginBottom: "1rem",
-          }}
-        />
-        <TextField
-          variant="standard"
           label="Email"
           type="email"
           onChange={handleEmailChange}
           value={email}
           sx={{
             marginBottom: "1rem",
-
           }}
         />
         <TextField
-          variant='standard'
-          label='Bio Text'
-          type='text'
+          variant="standard"
+          label="Bio Text"
+          type="text"
           onChange={handleBioText}
           value={bioText}
           sx={{
-            marginBottom: '2rem',
+            marginBottom: "2rem",
           }}
         />
         <TextField
-          variant='standard'
-          label='Password'
-          type='password'
+          variant="standard"
+          label="Password"
+          type="password"
           onChange={handlePasswordChange}
           value={password}
           sx={{
@@ -207,21 +190,20 @@ const SignUp = () => {
           }}
         />
         <TextField
-          variant='standard'
-          label='Confirm Password'
-          type='password'
+          variant="standard"
+          label="Confirm Password"
+          type="password"
           onChange={handleConfirmPasswordChange}
           value={confirmPassword}
           sx={{
             marginBottom: "1rem",
-
           }}
         />
         <Button
-          variant='contained'
-          sx={{ bgcolor: '#1d3557' }}
+          variant="contained"
+          sx={{ bgcolor: "#1d3557" }}
           onClick={handleRegistration}
-          type='submit'
+          type="submit"
         >
           Create Account
         </Button>
