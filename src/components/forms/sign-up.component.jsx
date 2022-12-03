@@ -12,15 +12,6 @@ const SignUp = () => {
   const [bioText, setBioText] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-=======
-  const [username, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [bioText, setBioText] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
->>>>>>> mazen
-
   const dispatch = useDispatch();
 
   const handleNameChange = (e) => {
@@ -61,7 +52,6 @@ const SignUp = () => {
       `confirmPassword:${confirmPassword}`,
       `userType:${userType}`
     );
-<<<<<<< HEAD
     if (userType == "user") {
       dispatch(
         signupAction({
@@ -72,16 +62,7 @@ const SignUp = () => {
           password,
           confirmPassword,
           userType,
-=======
-    if (userType == 'user') {
-      dispatch(
-        signupAction({
-          username,
-          email,
-          password,
-          confirmPassword,
-          phoneNumber,
->>>>>>> mazen
+
         })
       );
     } else {
@@ -92,11 +73,7 @@ const SignUp = () => {
         email: email,
         password: password,
         confirmPassword: confirmPassword,
-<<<<<<< HEAD
         userType,
-=======
-        phoneNumber: phoneNumber,
->>>>>>> mazen
       };
       try {
         const res = await axios.post(
@@ -145,15 +122,10 @@ const SignUp = () => {
           sx={{
             color: '#1d3557',
             fontWeight: 500,
-<<<<<<< HEAD
             textTransform: "uppercase",
             textAlign: "center",
             marginBottom: "1rem",
-=======
-            textTransform: 'uppercase',
-            textAlign: 'center',
-            marginBottom: '2rem',
->>>>>>> mazen
+
           }}
         >
           Create Account
@@ -180,7 +152,6 @@ const SignUp = () => {
           onChange={handleNameChange}
           value={username}
           sx={{
-<<<<<<< HEAD
             marginBottom: "1rem",
           }}
         />
@@ -212,29 +183,7 @@ const SignUp = () => {
           value={email}
           sx={{
             marginBottom: "1rem",
-=======
-            marginBottom: '2rem',
-          }}
-        />
-        <TextField
-          variant='standard'
-          label='Email'
-          type='email'
-          onChange={handleEmailChange}
-          value={email}
-          sx={{
-            marginBottom: '2rem',
-          }}
-        />
-        <TextField
-          variant='standard'
-          label='Enter Phone Number'
-          type='text'
-          onChange={handlePhoneNumber}
-          value={phoneNumber}
-          sx={{
-            marginBottom: '2rem',
->>>>>>> mazen
+
           }}
         />
         <TextField
@@ -254,11 +203,7 @@ const SignUp = () => {
           onChange={handlePasswordChange}
           value={password}
           sx={{
-<<<<<<< HEAD
             marginBottom: "1rem",
-=======
-            marginBottom: '2rem',
->>>>>>> mazen
           }}
         />
         <TextField
@@ -268,11 +213,8 @@ const SignUp = () => {
           onChange={handleConfirmPasswordChange}
           value={confirmPassword}
           sx={{
-<<<<<<< HEAD
             marginBottom: "1rem",
-=======
-            marginBottom: '2rem',
->>>>>>> mazen
+
           }}
         />
         <Button
