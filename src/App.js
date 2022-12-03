@@ -39,7 +39,7 @@ function App() {
       <AlertNotification />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/property/:id" element={<ViewPropertyPage />} />
+        <Route path="/property/:id" element={<ViewPropertyPage />} />   
         <Route path="/add" element={<AddProperty />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/admin" element={<AdminLogin />} />

@@ -23,6 +23,7 @@ const Rent = () => {
 
   const data = rentObj?.data?.data;
 
+  console.log('RENT PROPERTIES+>', data);
   return (
     <Box
       sx={{
@@ -52,6 +53,7 @@ const Rent = () => {
                   description={prop.description}
                   price={prop.price}
                   key={prop._id}
+                  coverImage={prop.coverImage}
                 />
               ))
             : ''}
