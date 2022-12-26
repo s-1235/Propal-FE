@@ -1,13 +1,13 @@
-import axios from 'axios';
+import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: 'http://localhost:6969',
+  baseURL: "http://localhost:6969",
   //   timeout: 1000,
 });
 
 apiClient.interceptors.request.use(
   (config) => {
-    const userDetails = localStorage.getItem('user');
+    const userDetails = localStorage.getItem("user");
 
     if (userDetails) {
       const token = JSON.parse(userDetails).token;
@@ -27,9 +27,7 @@ apiClient.interceptors.request.use(
 
 export const unApprovedProperties = async () => {
   try {
-    return await axios.get(
-      `http://localhost:6969/property/unApprovedProperties`
-    );
+    return await apiClient.get(`/property/unApprovedProperties`);
   } catch (exception) {
     return {
       error: true,
@@ -39,7 +37,17 @@ export const unApprovedProperties = async () => {
 };
 export const approveProperty = async (id) => {
   try {
-    return await axios.patch(`http://localhost:6969/property/approve/${id}`);
+    return await axios.apiClient(`/property/approve/${id}`);
+  } catch (exception) {
+    return {
+      error: true,
+      exception,
+    };
+  }
+};
+export const getPropertiesOfAUser = async (userId) => {
+  try {
+    return await apiClient.get(`/users/${userId}/properties`);
   } catch (exception) {
     return {
       error: true,
@@ -49,7 +57,7 @@ export const approveProperty = async (id) => {
 };
 export const propertyDelete = async (id) => {
   try {
-    return await axios.delete(`http://localhost:6969/property/${id}`);
+    return await apiClient.delete(`/property/${id}`);
   } catch (exception) {
     return {
       error: true,
@@ -59,7 +67,18 @@ export const propertyDelete = async (id) => {
 };
 export const userDelete = async (id) => {
   try {
-    return await axios.delete(`http://localhost:6969/users/${id}`);
+    return await axios.apiClient(`/users/${id}`);
+  } catch (exception) {
+    return {
+      error: true,
+      exception,
+    };
+  }
+};
+export const updatepProfile = async (data) => {
+  try {
+    console.log(data);
+    return await apiClient.patch(`/users/updateMe`, data);
   } catch (exception) {
     return {
       error: true,
@@ -70,7 +89,7 @@ export const userDelete = async (id) => {
 export const adminLogin = async (credentials) => {
   try {
     console.log(credentials);
-    return await axios.post('http://localhost:6969/admin', credentials);
+    return await axios.post("http://localhost:6969/admin", credentials);
     // return await apiClient.post('/admin', credentials);
   } catch (exception) {
     return {
@@ -83,7 +102,7 @@ export const login = async (credentials) => {
   try {
     console.log(credentials);
 
-    return await apiClient.post('/users/login', credentials);
+    return await apiClient.post("/users/login", credentials);
   } catch (exception) {
     return {
       error: true,
@@ -93,9 +112,9 @@ export const login = async (credentials) => {
 };
 export const signup = async (credentials) => {
   try {
-    console.log('credentials', credentials);
+    console.log("credentials", credentials);
 
-    return await axios.post('http://localhost:6969/users/signup', credentials);
+    return await axios.post("http://localhost:6969/users/signup", credentials);
   } catch (exception) {
     return {
       error: true,
@@ -106,13 +125,13 @@ export const signup = async (credentials) => {
 export const addProperty = async (credentials) => {
   try {
     let userId;
-    console.log('credentials', credentials);
-    const user = JSON.parse(localStorage.getItem('user'));
+    console.log("credentials", credentials);
+    const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
       userId = user.data._id;
       console.log(userId, `/property/${userId}`);
     } else {
-      console.log('User id not found');
+      console.log("User id not found");
     }
     return await apiClient.post(`/property/${userId}`, credentials);
     // return await apiClient.get(`/property`, credentials);
@@ -126,7 +145,28 @@ export const addProperty = async (credentials) => {
 
 export const getUserData = async (id) => {
   try {
-    return await axios.get(`http://localhost:6969/users/${id}`);
+    return await apiClient.get(`/users/${id}`);
+  } catch (exception) {
+    return {
+      error: true,
+      exception,
+    };
+  }
+};
+
+export const getAdminData = async () => {
+  try {
+    return await apiClient.get("/admin");
+  } catch (exception) {
+    return {
+      error: true,
+      exception,
+    };
+  }
+};
+export const getMe = async () => {
+  try {
+    return await apiClient.get("/users/me");
   } catch (exception) {
     return {
       error: true,

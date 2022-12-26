@@ -14,23 +14,49 @@ const PostCard = (props) => {
           component="img"
           height="160"
           // image={`./assets/img/${props.Images[0]}`}
+          image={`./../assets/img/hero-1.jpg`}
           alt="Property"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography
+            gutterBottom
+            variant="h6"
+            component="div"
+            sx={{
+              width: "200px",
+              height: "30px",
+              textOverflow: "ellipsis",
+              overflow: "hidden",
+              display: "inline-block",
+              WebkitLineClamp: 1,
+            }}
+          >
             {props.Name}
           </Typography>
           <Typography
             sx={{
               width: "200px",
-              height: "50px",
+              height: "60px",
               textOverflow: "ellipsis",
               overflow: "hidden",
               display: "inline-block",
-              WebkitLineClamp: 3,
+              WebkitLineClamp: 5,
+              fontSize: "12px",
+              textTransform: "capitalize",
+              textAlign: "left",
             }}
           >
-            {props.Description}
+            <div
+              style={{
+                width: "200px",
+                height: "50px",
+                textOverflow: "ellipsis",
+                overflow: "hidden",
+                display: "inline-block",
+                WebkitLineClamp: 3,
+              }}
+              dangerouslySetInnerHTML={{ __html: props.Description }}
+            ></div>
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -44,8 +70,8 @@ const PostCard = (props) => {
             },
           }}
           onClick={() => {
-            navigate(-2);
-            navigate(`/properties/${props.Id}`);
+            // navigate(-2);
+            navigate(`/property/${props.Id}`);
           }}
         >
           View Post

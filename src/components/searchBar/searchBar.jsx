@@ -65,7 +65,6 @@ const SearchBar = () => {
   const propertyTypeRef = useRef();
   const areaRef = useRef();
   const navigate = useNavigate();
-  const countRef = useRef(0);
 
   // const cities = [
   //   { name: "Lahore", value: "lahore" },
@@ -124,7 +123,6 @@ const SearchBar = () => {
     };
     navigate(`/property/search`, { state: { searchdata } });
   };
-  countRef.current = countRef.current + 1;
   return (
     <Grid
       sx={{
@@ -148,7 +146,7 @@ const SearchBar = () => {
           fontFamily: "baloo 2",
         }}
       >
-        Search Here {countRef.current}
+        Search Here
       </Typography>
       <ToggleButtonGroup
         color="primary"

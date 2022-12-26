@@ -5,8 +5,9 @@ import Divider from "@mui/material/Divider";
 import ProfileInformation from "./profileInformation";
 import RecentPosts from "./recentPosts";
 import { useEffect, useState } from "react";
-import { getAUser } from "../../Store/api";
+// import { getAUser } from "../../Store/api";
 import { useParams } from "react-router-dom";
+import { getUserData } from "../../api";
 
 const useStyles = makeStyles({
   gridClass: {
@@ -33,8 +34,9 @@ const ProfileData = (props) => {
   const { id } = useParams();
   useEffect(() => {
     let dumy = async () => {
-      const data = await getAUser(id);
-      setUserData(data?.data?.data?.data);
+      const data = await getUserData(id);
+      console.log(`User data is: ${data}`);
+      setUserData(data?.data?.data?.user);
       console.log(data);
     };
     dumy();
@@ -52,18 +54,19 @@ const ProfileData = (props) => {
       }}
     >
       <ProfileHeader
-        Name={userData?.name}
+        Name={userData?.username}
         ProfilePic={userData?.profilePic}
         ProfileType={userData?.userType}
         MyProfile={props.MyProfile}
       />
       <Divider variant="middle" sx={{ margin: 3 }} />
       <ProfileInformation
-        FirstName={userData?.firstname}
-        LastName={userData?.lastname}
+        // FirstName={userData?.firstname}
+        // LastName={userData?.lastname}
+        Name={userData?.username}
         Email={userData?.email}
         Phone={userData?.phone}
-        About={userData?.about}
+        About={userData?.bioText}
         Address={userData?.address}
       />
       <Divider variant="middle" sx={{ margin: 3 }} />

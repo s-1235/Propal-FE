@@ -139,7 +139,7 @@ const Navbar = () => {
                       aria-haspopup="true"
                       aria-expanded={open ? "true" : undefined}
                     >
-                      <Avatar>{letter}</Avatar>
+                      <Avatar>{letter ? letter : "A"}</Avatar>
                     </IconButton>
                   </Tooltip>
                 )}
@@ -188,6 +188,13 @@ const Navbar = () => {
                   </MenuItem>
                   <MenuItem onClick={() => navigate("/messenger")}>
                     <Avatar /> Inbox
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      handlebuttonClick();
+                    }}
+                  >
+                    <Avatar /> Update Profile
                   </MenuItem>
                   <Divider />
                   <MenuItem onClick={handleLogoutClick}>

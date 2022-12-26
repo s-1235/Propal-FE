@@ -1,13 +1,11 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
-import * as api from './../../api';
-import { alertActions } from './alertSlice';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import * as api from "./../../api";
+import { alertActions } from "./alertSlice";
 
 const adminSlice = createSlice({
-  name: 'admin',
+  name: "admin",
   initialState: {
     isLoggedIn: false,
-    adminData: null,
   },
   reducers: {
     loggedIn(state) {
@@ -16,36 +14,43 @@ const adminSlice = createSlice({
     loggedOut(state) {
       state.isLoggedIn = false;
     },
-    setAdminData(state, action) {
-      state.adminData = action.payload;
-    },
   },
 });
 
 export const adminLogin = createAsyncThunk(
-  'admin/login',
-  async ({ name, password }, thunkApi) => {
+  "admin/login",
+  async ({ username, password }, thunkApi) => {
     try {
-      const response = await api.adminLogin({ name, password });
+      const response = await api.adminLogin({ username, password });
       console.log(response);
       if (!response.data) {
         return thunkApi.dispatch(
           alertActions.openAlertBox("Can't Login Admin")
         );
       }
-
-      const adminData = response?.data;
-
-      thunkApi.dispatch(adminActions.setAdminData(adminData)); // Set admin data which came from server to state
+      console.log(response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data));
       thunkApi.dispatch(adminActions.loggedIn());
-      thunkApi.dispatch(alertActions.openAlertBox('Admin Login Successful'));
-      return adminData;
+      thunkApi.dispatch(alertActions.openAlertBox("Admin Login Successful"));
     } catch (error) {
-      console.log('custom error', error);
+      console.log("custom error", error);
       thunkApi.dispatch(alertActions.openAlertBox("Can't Login Admin!"));
     }
   }
 );
+
+export const adminData = createAsyncThunk("admin/data", async (thunkApi) => {
+  try {
+    const response = await api.getAdminData();
+    console.log(response);
+    if (!response.data.adminData) {
+      console.log("custom error");
+    }
+    return response.data.adminData;
+  } catch (error) {
+    console.log("custom error", error);
+  }
+});
 
 export const adminActions = adminSlice.actions;
 

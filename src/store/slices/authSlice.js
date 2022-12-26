@@ -66,16 +66,16 @@ export const loginAction = createAsyncThunk(
         // throw new Error('there is no respons. Quitting');
       }
       // else {
-      //   thunkApi.getState((state) => state.isAuthenticated === true);
+
       //   thunkApi.dispatch(alertActions.openAlertBox('success'));
       // }
-
       const userDetails = response?.data;
 
       localStorage.setItem("user", JSON.stringify(userDetails));
 
       const st = thunkApi.getState((state) => state);
       console.log(st);
+      thunkApi.getState((state) => state.isAuthenticated === true);
       thunkApi.dispatch(authActions.authenticate());
       thunkApi.dispatch(authActions.setUser(response.data.data));
       thunkApi.dispatch(alertActions.openAlertBox("success"));
@@ -117,6 +117,7 @@ export const signupAction = createAsyncThunk(
 
       console.log(userDetails);
       localStorage.setItem("user", JSON.stringify(userDetails));
+      return userDetails;
     } catch (error) {
       console.log("custom error", error);
     }

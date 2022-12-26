@@ -2,6 +2,7 @@ import { Button, TextField, Box, Typography, MenuItem } from "@mui/material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { signupAction } from "../../store/slices/authSlice";
+import { modalActions } from "../../store/slices/modal";
 import axios from "axios";
 
 const SignUp = () => {
@@ -49,7 +50,7 @@ const SignUp = () => {
       `userType:${userType}`
     );
     if (userType == "user") {
-      dispatch(
+      const data = await dispatch(
         signupAction({
           username,
           bioText,
@@ -60,6 +61,10 @@ const SignUp = () => {
           userType,
         })
       );
+      console.log(data);
+      if (data.payload.status === "success") {
+        dispatch(modalActions.closeModal());
+      }
     } else {
       const body = {
         username: username,
@@ -78,6 +83,7 @@ const SignUp = () => {
         console.log(res);
         if (res.status == 201) {
           console.log("ok");
+          dispatch(modalActions.closeModal());
         }
       } catch (err) {
         console.log(err);

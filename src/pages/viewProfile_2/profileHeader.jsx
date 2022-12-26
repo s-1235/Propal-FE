@@ -36,6 +36,7 @@ const ProfileHeader = (props) => {
               fontWeight: 800,
               textDecoration: "none",
               lineHeight: "30px",
+              textTransform: "capitalize",
             }}
           >
             {props.Name}
@@ -49,7 +50,7 @@ const ProfileHeader = (props) => {
               opacity: 0.6,
             }}
           >
-            {props.ProfileType}
+            {props.ProfileType == "user" ? "SimpleUser" : props.ProfileType}
           </Typography>
         </Box>
       </Box>

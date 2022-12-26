@@ -1,5 +1,5 @@
 import { CssBaseline } from "@mui/material";
-import { Provider, useDispatch } from "react-redux";
+import { Provider } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Footer from "./layout/footer/footer.component";
@@ -8,7 +8,7 @@ import NavbarContractor from "./layout/navbar/contractorNav";
 
 import AddProperty from "./pages/add-property/addProperty.component";
 import Home from "./pages/homepage/homepage.component";
-import Property from "./pages/single-property/property.component";
+// import Property from "./pages/single-property/property.component";
 import store from "./store/store";
 import AuthModal from "./components/modals/auth.component";
 import Dashboard from "./pages/dashboard/dashboard.component";
@@ -28,8 +28,10 @@ import MyJob from "./pages/myJobs/myJob";
 import SeeJobs from "./pages/job/SeeJobs";
 import DetailJob from "./pages/job/DetailJob";
 import ViewPropertyPage from "./pages/ViewProperty/ViewPropertyPage";
+import ViewProfilePage from "./pages/viewProfile_2/viewProfile";
+import UpdateProfile from "./components/forms/update-profile.component";
 function App() {
-  const currentlyLogged = localStorage.getItem("currentlyLogged");
+  // const currentlyLogged = localStorage.getItem("currentlyLogged");
   return (
     <Provider store={store}>
       <CssBaseline />
@@ -39,7 +41,8 @@ function App() {
       <AlertNotification />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/property/:id" element={<ViewPropertyPage />} />   
+        <Route path="/property/:id" element={<ViewPropertyPage />} />
+        <Route path="/user/:id" element={<ViewProfilePage />} />
         <Route path="/add" element={<AddProperty />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/admin" element={<AdminLogin />} />

@@ -1,7 +1,8 @@
 import { Grid, Typography, Box } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getPropertiesOfAUser } from "../../Store/api";
+// import { getPropertiesOfAUser } from "../../Store/api";
+import { getPropertiesOfAUser } from "../../api";
 import PostCard from "./postCard";
 const RecentPosts = () => {
   const [propertyData, setPropertyData] = useState(null);
@@ -9,9 +10,10 @@ const RecentPosts = () => {
   useEffect(() => {
     const dumy = async () => {
       const data = await getPropertiesOfAUser(id);
-      setPropertyData(data?.data?.data.docs);
+      setPropertyData(data?.data?.data.property);
+      console.log("In Recent Posts");
       console.log(data);
-      console.log(data?.data?.data.docs);
+      console.log(data?.data?.data.property);
     };
     dumy();
   }, [id]);
@@ -43,10 +45,10 @@ const RecentPosts = () => {
           propertyData?.slice(0, 3).map((property) => {
             return (
               <PostCard
-                Id={property.id}
+                Id={property._id}
                 Description={property.description}
                 Images={property.images}
-                Name={property.name}
+                Name={property.title}
               />
             );
           })
@@ -71,10 +73,10 @@ const RecentPosts = () => {
           propertyData?.map((property) => {
             return (
               <PostCard
-                Id={property.id}
+                Id={property._id}
                 Description={property.description}
                 Images={property.images}
-                Name={property.name}
+                Name={property.title}
               />
             );
           })
